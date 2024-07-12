@@ -1,9 +1,12 @@
+<!-- resources/views/users/index.blade.php -->
+
 @extends('layouts.app')
 
 @section('content')
     <div class="container">
         <h2>Users</h2>
         <a href="{{ route('users.create') }}" class="btn btn-primary mb-2">Create User</a>
+        <!-- Hiển thị danh sách Users -->
         @if ($users->isEmpty())
             <p>There are no users.</p>
         @else
@@ -32,7 +35,10 @@
                     </tr>
                 @endforeach
                 </tbody>
+
             </table>
+            {{ $users->links() }}
         @endif
+
     </div>
 @endsection
