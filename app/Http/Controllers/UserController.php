@@ -11,7 +11,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::latest() -> paginate(5);
-        return view('index', compact('users'));
+        return view('users.index', compact('users'));
     }
     public function create()
     {
@@ -19,19 +19,34 @@ class UserController extends Controller
     }
     public function save(Request $request)
     {
-        $data = $request->all();
-        //mã hóa password
-        $data ['password'] = Hash::make($request -> password);
+        $data = $request->validate(['name' => 'required',
+            'email' => 'required|email|unique:users,email',]);
         User::create($data);
         echo "Created User";
     }
-    public function edit(User $user)
+    public function edit($id)
     {
+        $user = User::findOrFail($id);
         return view('users.edit', compact('user'));
     }
-    public function update(User $user, Request $request)
+    public function update(Request $request, $id)
     {
-        $user -> update($request->all());
-        return redirect() -> route('users.index') -> with('success', 'User updated successfully');
+        $validateData = $request->validate([
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email,'.$id,]);
+        $user = User::findorFail($id);
+        $user -> update($validateData);
+        return redirect() -> route('users.index') -> with('success', 'User updated!');
+    }
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user -> delete();
+        return redirect() -> route('users.index') -> with('success', 'User deleted!');
+    }
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return view('users.show', compact('user'));
     }
 }

@@ -1,32 +1,28 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create User</title>
-</head>
-<body>
-    <h1>Create New User</h1>
-    <form action="/users/create" method="post">
-        @csrf
-        <label for="Name">
-            Name:
-            <input type="text" name="name">
-        </label>
-        <br>
-        <label for="Email">
-            Email:
-            <input type="text" name="email">
-        </label>
-        <br>
-        <label for="Password">
-            Password:
-            <input type="text" name="password">
-        </label>
-        <br>
-        <button type="submit">Create</button>
-    </form>
-</body>
-</html>
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <h2>Create User</h2>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <form action="{{ route('users.save') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+@endsection

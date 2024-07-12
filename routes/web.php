@@ -14,12 +14,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/users/create', [UserController::class, 'create']);
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
 
-Route::post('/users/create', [UserController::class, 'save']);
+Route::post('/users/create', [UserController::class, 'save']) ->name('users.save');
 
-Route::get('/users/edit', [UserController::class, 'edit']);
+Route::GET('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
 
-Route::post('/users/edit', [UserController::class, 'update']);
+Route::POST('/users/edit/{id}', [UserController::class, 'update'])->name('users.update');
 
-Route::get('/users/index', [UserController::class, 'index']);
+Route::get('/users', [UserController::class, 'index']) -> name('users.index');
+
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
