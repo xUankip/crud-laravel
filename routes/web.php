@@ -27,4 +27,9 @@ Route::get('/users', [UserController::class, 'index']) -> name('users.index');
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
 Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+Route::get('/users/login', [UserController::class, 'login']) -> name('users.login');
+Route::get('/users/register', [UserController::class, 'register']) -> name('users.register');
 
+Route::get('/', function (){
+    return view('welcome');
+});
