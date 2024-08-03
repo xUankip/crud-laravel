@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="/dist/css/reponsive.css">
     <link rel="stylesheet" href="/dist/css/mode.css">
     <link rel="stylesheet" href="/dist/css/course.css">
+    <link rel="stylesheet" href="/dist/css/login.css">
 </head>
 <div id="main">
     <div id="header">
