@@ -32,7 +32,7 @@
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>UserName</th>
                                     <th>Email</th>
                                     <th>Action</th>
                                 </tr>
@@ -40,7 +40,7 @@
                                 <tbody>
                                 @foreach ($users as $user)
                                     <tr>
-                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->username }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>
                                             <a href="{{ route('users.show', $user->id) }}" class="btn btn-info btn-sm">View</a>
