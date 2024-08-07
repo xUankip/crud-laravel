@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>QuizAI</title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Laravel</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -44,8 +45,17 @@
             <li><a href="#contact">Liên hệ</a></li>
             <li><a href="#contribute">Góp ý</a></li>
             <li><a id="reload1" href="#qna">Hỏi đáp</a></li>
-            <!-- ngIf: Student == null --><li ng-if="Student == null" class="ng-scope"><a href="#login">Đăng nhập</a></li><!-- end ngIf: Student == null -->
-            <!-- ngIf: Student == null --><li ng-if="Student == null" class="ng-scope"><a href="#register">Đăng ký</a></li><!-- end ngIf: Student == null -->
+            <li ng-if="Student != null">
+                <a>Chào,  {{--chỗ này cho nó hiển thị username--}}
+                    <i class="nav-arrow-down ti-angle-down"></i>
+                </a>
+                <ul class="subnav subnav-user">
+                    <li><a href="#infor">Chỉnh sửa thông tin</a></li>
+                    <li><a ng-if="Student.role == 1" href="#manager">Quản lí tài khoản</a></li>
+                    <li><a href="#changepassword">Đổi mật khẩu</a></li>
+                    <li><a ng-click="logout()">Đăng xuất</a></li>
+                </ul>
+            </li>
 
             <!-- ngIf: Student != null -->
 
@@ -92,14 +102,16 @@
                         Môi trường sáng tạo thú vị cho riêng bạn!
 
                     </div>
-                    <button ng-click="getStating()" class="cssbuttons-io-button"> Bắt đầu nào
+                    <div style="display: inline-flex;align-items: center;text-decoration: none;">
+                    <a href="{{ route('users.create_quiz') }}" class="cssbuttons-io-button"> Bắt đầu nào
                         <div class="icon">
                             <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0 0h24v24H0z" fill="none"></path>
                                 <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path>
                             </svg>
                         </div>
-                    </button>
+                    </a>
+                    </div>
                 </div>
             </div>
 
@@ -110,7 +122,7 @@
             <div class="row">
                 <div class="col-sm-12 col-md-6">
                     <h6>Giới thiệu</h6>
-                    <p class="text-justify">Frog Quiz<i> HỆ THỐNG TRẮC NGHIỆM MIỄN PHÍ 2024</i>
+                    <p class="text-justify">QuizAI<i> HỆ THỐNG TRẮC NGHIỆM MIỄN PHÍ 2024</i>
                 </div>
 
                 <div class="col-xs-6 col-md-3">

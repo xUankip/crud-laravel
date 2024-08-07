@@ -8,6 +8,10 @@ use Illuminate\Pagination\Paginator;
 
 class UserController extends Controller
 {
+    public function home()
+    {
+        return view('welcome');
+    }
     public function index()
     {
         $users = User::paginate(5);
@@ -48,5 +52,9 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         return view('users.show', compact('user'));
+    }
+    public function create_quiz()
+    {
+        return view('users.create_quiz');
     }
 }
